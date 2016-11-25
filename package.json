@@ -1,0 +1,37 @@
+{
+  "name": "retropie-profiles-server",
+  "version": "0.0.0",
+  "description": "Login server for the `RetroPie-profiles` plugin",
+  "main": "index.js",
+  "scripts": {
+    "start": "n8-server --harmony-async-await server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/TooTallNate/RetroPie-profiles-server.git"
+  },
+  "keywords": [
+    "retro",
+    "pie",
+    "raspberry",
+    "pi",
+    "gaming",
+    "save",
+    "files",
+    "state",
+    "profiles",
+    "facebook",
+    "oauth"
+  ],
+  "author": "Nathan Rajlich <n@n8.io>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/TooTallNate/RetroPie-profiles-server/issues"
+  },
+  "homepage": "https://github.com/TooTallNate/RetroPie-profiles-server#readme",
+  "dependencies": {
+    "debug": "^2.3.3",
+    "n8-server": "^2.1.2",
+    "node-fetch": "^1.6.3"
+  }
+}

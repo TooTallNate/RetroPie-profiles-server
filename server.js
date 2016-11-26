@@ -25,6 +25,8 @@ module.exports = async function (req, res) {
 
   if ('/login' === parsed.pathname) {
     // the login.sh curl command that will wait for a login event to happen
+    req.setTimeout(0)
+
     const login = await waitEvent(emitter, 'login')
 
     // return a string that bash can eval for env vars

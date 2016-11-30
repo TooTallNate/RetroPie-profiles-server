@@ -13,6 +13,7 @@
  * human readable name of the user.
  */
 const { parse } = require('url')
+const { createHash } = require('crypto')
 
 module.exports = async function (req, res) {
   const parsed = parse(req.url, true)
@@ -22,7 +23,7 @@ module.exports = async function (req, res) {
     res.emit('login', {
       // Make sure you use a unique ID associated with the user.
       // This would usually be a user ID or database ID
-      id: user.toLowerCase(),
+      id: shasum(user),
 
       // This is the user name that is displayed in the Login status page.
       // Only used for display purposes
@@ -47,4 +48,10 @@ module.exports = async function (req, res) {
       </html>
     `
   }
+}
+
+function shasum (str) {
+  const hash = createHash('sha1')
+  hash.update(str)
+  return hash.digest('hex')
 }

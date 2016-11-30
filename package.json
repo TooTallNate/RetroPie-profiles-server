@@ -4,7 +4,7 @@
   "description": "Login server for the `RetroPie-profiles` plugin",
   "main": "./server.js",
   "scripts": {
-    "start": "n8-server --harmony-async-await server.js"
+    "start": "n8-server --harmony-async-await server.js example.js"
   },
   "repository": {
     "type": "git",

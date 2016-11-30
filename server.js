@@ -15,7 +15,7 @@ const debug = require('debug')('RetroPie-profiles-server')
 // emits "login" events for successful logins to the curl connection(s)
 const emitter = new EventEmitter()
 
-let filename = process.argv[3]
+let filename = process.sub[1]
 if (!isAbsolute(filename)) {
   filename = resolve(filename);
 }

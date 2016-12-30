@@ -63,6 +63,9 @@ $ npm start -- --port 3000
 For a more concrete (but still silly) example, take a look at
 [`example.js`](./example.js).
 
+For a more real-world useful exmaple, take a look at
+[`RetroPie-profiles-facebook-login`][fb].
+
 
 ## Deploying to [Now](https://now.sh)
 
@@ -105,3 +108,4 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 [RetroPie-profiles]: https://github.com/TooTallNate/RetroPie-profiles
+[fb]: https://github.com/TooTallNate/RetroPie-profiles-facebook-login

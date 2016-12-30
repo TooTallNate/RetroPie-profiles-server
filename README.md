@@ -1,4 +1,4 @@
-# RetroPie-profiles-server  <img src="./icon.png" width="48" align="right" />
+# RetroPie-profiles-server
 ### `RetroPie-profiles` plugin Login Server base implementation
 
 The [RetroPie-profiles][] plugin requires a "Login Server" to determine which users

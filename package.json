@@ -1,7 +1,7 @@
 {
   "name": "retropie-profiles-server",
   "version": "1.0.0",
-  "description": "Login server for the `RetroPie-profiles` plugin",
+  "description": "`RetroPie-profiles` plugin Login Server base implementation",
   "main": "./server.js",
   "scripts": {
     "start": "n8-server --harmony-async-await server.js example.js"

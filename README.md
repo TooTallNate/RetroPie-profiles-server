@@ -30,7 +30,7 @@ The `"start"` script in your `package.json` file should look something like
   },
 ```
 
-Finally create a file called `server.js` with initial contents like:
+Finally, create a file called `server.js` with initial contents like:
 
 ```js
 module.exports = async function (req, res) {
@@ -54,17 +54,16 @@ module.exports = async function (req, res) {
 }
 ```
 
-That's it! You can run the server on localhost port 3000 by running:
+You can run the server on localhost port 3000 by running:
 
 ```bash
 $ npm start -- --port 3000
 ```
 
-For a more concrete (but still silly) example, take a look at
-[`example.js`](./example.js).
+That's it!
 
-For a more real-world useful exmaple, take a look at
-[`RetroPie-profiles-facebook-login`][fb].
+ - For a more concrete (but still silly) example, take a look at [`example.js`](./example.js).
+ - For a more real-world useful exmaple, take a look at [`RetroPie-profiles-facebook-login`][fb].
 
 
 ## Deploying to [Now](https://now.sh)

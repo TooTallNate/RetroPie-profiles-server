@@ -5,9 +5,6 @@ The [RetroPie-profiles][] plugin requires a "Login Server" to determine which us
 database the profiles will log in as. This is a Node.js base implementation of
 a "Login Server" which you can extend to implement your own login backend.
 
-## Usage
-
-
 
 ## Setup
 

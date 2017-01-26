@@ -60,7 +60,7 @@ $ npm start -- --port 3000
 That's it!
 
  - For a more concrete (but still silly) example, take a look at [`example.js`](./example.js).
- - For a more real-world useful exmaple, take a look at [`RetroPie-profiles-facebook-login`][fb].
+ - For a more real-world useful example, take a look at [`RetroPie-profiles-facebook-login`][fb].
 
 
 ## Deploying to [Now](https://now.sh)

@@ -1,3 +1,9 @@
+2.0.2
+=====
+
+* [[`7186023a89`](https://github.com/TooTallNate/retropie-profiles-server/commit/7186023a89)] - return `false` if login() is called without any listeners (Nathan Rajlich)
+* [[`c024c70926`](https://github.com/TooTallNate/retropie-profiles-server/commit/c024c70926)] - fix DEBUG env var (Nathan Rajlich)
+
 2.0.1
 =====
 

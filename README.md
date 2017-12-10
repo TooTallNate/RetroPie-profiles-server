@@ -8,14 +8,14 @@ a "Login Server" which you can extend to implement your own login backend.
 
 ## Setup
 
-Create a new project, and add `retropie-profiles-server` and `n8-server` as
+Create a new project, and add `retropie-profiles-server` and `micro` as
 dependencies:
 
 ```bash
 $ npm init
 # fill out the prompts
 
-$ npm install --save n8-server retropie-profiles-server
+$ npm install --save micro retropie-profiles-server
 # necessary dependencies are now installed
 ```
 
@@ -23,19 +23,21 @@ The `"start"` script in your `package.json` file should look something like
 
 ``` json
   "scripts": {
-    "start": "n8-server --harmony-async-await retropie-profiles-server server.js"
+    "start": "micro server.js"
   },
 ```
 
 Finally, create a file called `server.js` with initial contents like:
 
 ```js
-module.exports = async function (req, res) {
+const retropieProfiles = require('retropie-profiles-server')
+
+module.exports = retropieProfiles(async function (req, res, login) {
   const name = 'Nate'
   const id = 1
 
   // you may emit the "login" event on `res` to log in a user
-  res.emit('login', {
+  const hosts = login({
     // Make sure you use a unique ID associated with the user.
     // This would usually be a user ID or database ID
     id: id,
@@ -47,14 +49,14 @@ module.exports = async function (req, res) {
 
   // you have complete control over the HTTP request and response
   res.setHeader('Content-Type', 'text/plain')
-  res.end('Hello from the Login Server!')
-}
+  res.end(`You have been logged in on ${hosts.join(', ')}`)
+})
 ```
 
 You can run the server on localhost port 3000 by running:
 
 ```bash
-$ npm start -- --port 3000
+$ npm start
 ```
 
 That's it!

@@ -31,6 +31,7 @@ module.exports = retropieProfiles(async (req, res, login) => {
       name: user
     })
 
+    res.setHeader('Content-Type', 'text/plain; charset=utf8')
     return `Logged in as ${user} on ${hosts.join(', ')}. 🕹 on!`
   } else {
     res.setHeader('Content-Type', 'text/html')

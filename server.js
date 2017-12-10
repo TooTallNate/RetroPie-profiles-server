@@ -51,6 +51,12 @@ function setup(fn) {
 
     if ('/login' === parsed.pathname) {
       const { hostname } = parsed.query
+      if (!hostname) {
+        res.statusCode = 500
+        return {
+          error: '`hostname` query parameter is required'
+        }
+      }
 
       // the login.sh curl command that will wait for `doLogin()` to be called
       req.setTimeout(0)

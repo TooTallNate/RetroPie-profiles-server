@@ -1,3 +1,10 @@
+2.0.1
+=====
+
+* [[`478ee50a8a`](https://github.com/TooTallNate/retropie-profiles-server/commit/478ee50a8a)] - enable DEBUG in example (Nathan Rajlich)
+* [[`589981625f`](https://github.com/TooTallNate/retropie-profiles-server/commit/589981625f)] - set content-type in example (Nathan Rajlich)
+* [[`7e3fdefab0`](https://github.com/TooTallNate/retropie-profiles-server/commit/7e3fdefab0)] - return an error if `hostname` is not specified (Nathan Rajlich)
+
 2.0.0
 =====
 

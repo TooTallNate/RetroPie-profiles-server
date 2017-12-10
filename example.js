@@ -15,22 +15,23 @@
 const { parse } = require('url')
 const { createHash } = require('crypto')
 
-module.exports = async function (req, res) {
-  const parsed = parse(req.url, true)
-  const { user } = parsed.query
+const retropieProfiles = require('./')
+
+module.exports = retropieProfiles(async (req, res, login) => {
+  const { query: { user } } = parse(req.url, true)
   if (user) {
-    // user submitted the form with a user selection
-    res.emit('login', {
+    // User submitted the form with a user selection
+    const hosts = login({
       // Make sure you use a unique ID associated with the user.
-      // This would usually be a user ID or database ID
+      // This would usually be a user ID or database ID.
       id: shasum(user),
 
       // This is the user name that is displayed in the Login status page.
-      // Only used for display purposes
+      // Only used for display purposes.
       name: user
     })
 
-    return `Logged in as ${user}. 🕹 on!`
+    return `Logged in as ${user} on ${hosts.join(', ')}. 🕹 on!`
   } else {
     res.setHeader('Content-Type', 'text/html')
     return `
@@ -48,9 +49,9 @@ module.exports = async function (req, res) {
       </html>
     `
   }
-}
+})
 
-function shasum (str) {
+function shasum(str) {
   const hash = createHash('sha1')
   hash.update(str)
   return hash.digest('hex')

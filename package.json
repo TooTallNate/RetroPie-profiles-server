@@ -4,7 +4,7 @@
   "description": "`RetroPie-profiles` plugin Login Server base implementation",
   "main": "./server.js",
   "scripts": {
-    "start": "n8-server --harmony-async-await server.js example.js"
+    "start": "micro example.js"
   },
   "repository": {
     "type": "git",
@@ -30,8 +30,10 @@
   },
   "homepage": "https://github.com/TooTallNate/RetroPie-profiles-server#readme",
   "dependencies": {
-    "debug": "^2.3.3",
-    "n8-server": "^2.1.2",
+    "debug": "^3",
     "snake-case": "^2.1.0"
+  },
+  "devDependencies": {
+    "micro": "^9.0.2"
   }
 }

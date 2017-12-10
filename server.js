@@ -12,37 +12,12 @@ const { EventEmitter } = require('events')
 const { resolve, isAbsolute } = require('path')
 const debug = require('debug')('RetroPie-profiles-server')
 
-// emits "login" events for successful logins to the curl connection(s)
-const emitter = new EventEmitter()
+module.exports = setup
 
-let filename = process.sub[1]
-if (!isAbsolute(filename)) {
-  filename = resolve(filename)
-}
+function setup(fn) {
+  let connections = new Set()
 
-debug('entry point: %o', filename)
-let mod = require(filename)
-if (mod.default) mod = mod.default
-
-if ('function' !== typeof mod) {
-  throw new TypeError(`A function must be exported. Got "${typeof mod}"`)
-}
-
-module.exports = async function(req, res) {
-  res.setHeader('Connection', 'close')
-
-  const parsed = parse(req.url)
-
-  if ('/login' === parsed.pathname) {
-    // the login.sh curl command that will wait for a login event to happen
-    req.setTimeout(0)
-
-    req.socket.once('close', () => debug('curl socket closed'))
-
-    debug('curl command waiting for "login" event to happen')
-    const login = await waitEvent(emitter, 'login')
-
-    // return a string that bash can eval for env vars
+  function doLogin(login) {
     const env = Object.keys(login)
       .map(key => {
         const name = snakeCase(key).toUpperCase()
@@ -50,16 +25,50 @@ module.exports = async function(req, res) {
         return `export ${name}=${value}`
       })
       .join('\n')
-    debug('returning env to login.sh: %o', env)
-    return env
-  } else {
-    res.once('login', login => emitter.emit('login', login))
-    return Promise.resolve(mod(req, res))
-  }
-}
+    debug('login env:')
+    debug(env)
 
-function waitEvent(emitter, name) {
-  return new Promise((resolve, reject) => {
-    emitter.once(name, resolve)
-  })
+    if (connections.size === 0) {
+      throw new Error('No RetroPie-Profile login windows are connected')
+    }
+
+    const hostnames = new Set()
+
+    for (const res of connections) {
+      hostnames.add(res.hostname)
+      res.setHeader('Content-Type', 'text/plain')
+      res.statusCode = 200
+      res.end(env)
+    }
+
+    connections = new Set()
+
+    return Array.from(hostnames)
+  }
+
+  return async function retropieProfiles(req, res) {
+    res.setHeader('Connection', 'close')
+
+    const parsed = parse(req.url, true)
+
+    if ('/login' === parsed.pathname) {
+      const { hostname } = parsed.query
+
+      // the login.sh curl command that will wait for `doLogin()` to be called
+      req.setTimeout(0)
+
+      req.socket.once('close', () => {
+        debug('login window for %o closed', hostname)
+        connections.delete(res)
+      })
+
+      debug('login window for %o connected', hostname)
+      connections.add(res)
+      res.hostname = hostname
+    } else {
+      const args = [].slice.call(arguments)
+      args.push(doLogin)
+      return Promise.resolve(fn.apply(this, args))
+    }
+  }
 }

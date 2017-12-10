@@ -4,7 +4,7 @@
   "description": "`RetroPie-profiles` plugin Login Server base implementation",
   "main": "./server.js",
   "scripts": {
-    "start": "micro example.js"
+    "start": "DEBUG=retropie* micro example.js"
   },
   "repository": {
     "type": "git",

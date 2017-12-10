@@ -8,8 +8,6 @@
 
 const { parse } = require('url')
 const snakeCase = require('snake-case')
-const { EventEmitter } = require('events')
-const { resolve, isAbsolute } = require('path')
 const debug = require('debug')('RetroPie-profiles-server')
 
 module.exports = setup

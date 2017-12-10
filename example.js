@@ -32,7 +32,13 @@ module.exports = retropieProfiles(async (req, res, login) => {
     })
 
     res.setHeader('Content-Type', 'text/plain; charset=utf8')
-    return `Logged in as ${user} on ${hosts.join(', ')}. 🕹 on!`
+
+    if (hosts) {
+      return `Logged in as ${user} on ${hosts.join(', ')}. 🕹 on!`
+    } else {
+      res.statusCode = 400
+      return `Failed to log in as ${user} because there are no login windows connected ☹️`
+    }
   } else {
     res.setHeader('Content-Type', 'text/html')
     return `

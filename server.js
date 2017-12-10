@@ -27,7 +27,7 @@ function setup(fn) {
     debug(env)
 
     if (connections.size === 0) {
-      throw new Error('No RetroPie-Profile login windows are connected')
+      return false
     }
 
     const hostnames = new Set()

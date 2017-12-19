@@ -13,6 +13,7 @@ const debug = require('debug')('RetroPie-profiles-server')
 module.exports = setup
 
 function setup(fn) {
+  let hostnames = new Set()
   let connections = new Set()
 
   function doLogin(login) {
@@ -30,15 +31,13 @@ function setup(fn) {
       return false
     }
 
-    const hostnames = new Set()
-
     for (const res of connections) {
-      hostnames.add(res.hostname)
       res.setHeader('Content-Type', 'text/plain')
       res.statusCode = 200
       res.end(env)
     }
 
+    hostnames = new Set()
     connections = new Set()
 
     return Array.from(hostnames)
@@ -67,8 +66,8 @@ function setup(fn) {
       })
 
       debug('login window for %o connected', hostname)
+      hostnames.add(hostname)
       connections.add(res)
-      res.hostname = hostname
     } else {
       const args = Array.from(arguments)
       args.push(doLogin)

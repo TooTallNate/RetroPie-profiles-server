@@ -70,7 +70,7 @@ function setup(fn) {
       connections.add(res)
       res.hostname = hostname
     } else {
-      const args = [].slice.call(arguments)
+      const args = Array.from(arguments)
       args.push(doLogin)
       return Promise.resolve(fn.apply(this, args))
     }

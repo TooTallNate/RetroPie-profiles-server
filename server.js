@@ -7,7 +7,6 @@
  */
 
 const { parse } = require('url')
-const snakeCase = require('snake-case')
 const debug = require('debug')('RetroPie-profiles-server')
 
 module.exports = setup
@@ -17,24 +16,18 @@ function setup(fn) {
   let connections = new Set()
 
   function doLogin(login) {
-    const env = Object.keys(login)
-      .map(key => {
-        const name = snakeCase(key).toUpperCase()
-        const value = JSON.stringify(login[key])
-        return `export ${name}=${value}`
-      })
-      .join('\n')
-    debug('login env:')
-    debug(env)
+    debug('doLogin(%o)', login)
 
     if (connections.size === 0) {
       return false
     }
 
+    const body = JSON.stringify(login)
+
     for (const res of connections) {
-      res.setHeader('Content-Type', 'text/plain')
+      res.setHeader('Content-Type', 'application/json; charset=utf-8')
       res.statusCode = 200
-      res.end(env)
+      res.end(body)
     }
 
     hostnames = new Set()

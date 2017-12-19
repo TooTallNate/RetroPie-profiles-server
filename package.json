@@ -30,8 +30,7 @@
   },
   "homepage": "https://github.com/TooTallNate/RetroPie-profiles-server#readme",
   "dependencies": {
-    "debug": "^3",
-    "snake-case": "^2.1.0"
+    "debug": "^3"
   },
   "devDependencies": {
     "micro": "^9.0.2"

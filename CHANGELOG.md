@@ -1,3 +1,10 @@
+3.0.0
+=====
+
+* [[`314a82c560`](https://github.com/TooTallNate/retropie-profiles-server/commit/314a82c560)] - Convert to JSON response (breaking change) (Nathan Rajlich)
+* [[`b1d2742ceb`](https://github.com/TooTallNate/retropie-profiles-server/commit/b1d2742ceb)] - Construct the `hostnames` Set outside of doLogin() (Nathan Rajlich)
+* [[`a91969903d`](https://github.com/TooTallNate/retropie-profiles-server/commit/a91969903d)] - Use `Array.from(arguments)` (Nathan Rajlich)
+
 2.0.2
 =====
 
